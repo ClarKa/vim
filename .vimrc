@@ -1,13 +1,3 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2014 Feb 05
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
 "-----------------------------------------------------------------------------------------------------
 "vbundle
 set nocompatible              " be iMproved, required
@@ -31,8 +21,10 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
-
+Plugin 'nathanaelkane/vim-indent-guides' 
 Plugin 'mattn/emmet-vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -63,9 +55,6 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -127,15 +116,46 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+"set expandtab "Space characters for tab  
 set number
-set tabstop=4
-set shiftwidth=4
+set tabstop=4 
+set shiftwidth=4 
 set cursorline
-autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
+set nobackup
+set guifont=Monaco:h14
+"set completeopt=longest,menuone
+set whichwrap+=<,>,h,l " 允许backspace和光标键跨越行边界
+imap { {}<ESC>i<CR><ESC>O
+imap ( ()<Esc>i
+imap [ []<Esc>i
+:inoremap " ""<ESC>i
+:inoremap ' ''<ESC>i
 
+"Indent in Normal or Visual using tab & tab+shift
+nmap <tab> V>
+nmap <s-tab> V<
+vmap <tab> >gv
+vmap <s-tab> <gv
 
+"Enter for new line in Normal
+nmap <CR> o<ESC>
+
+"zencoding hotkey
+let g:user_emmet_expandabbr_key = '<A-Tab>'
+
+"NERTree
+nnoremap <leader>1 :set filetype=xhtml<CR>
+autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <C-n> :NERDTreeToggle<CR>
+
+"Indent guide
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+"let g:indent_guides_color_change_percent = 50
+"let g:indent_guides_guide_size = 1
+"let g:indent_guides_default_mapping = 0
+"let g:indent_guides_enable_on_vim_startup = 1
+"map <C-i> :IndentGuidesToggle<CR> 
