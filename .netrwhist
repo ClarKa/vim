@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/'
 let g:netrw_dirhist_2='/.DocumentRevisions-V100'
 let g:netrw_dirhist_3='/'
@@ -8,3 +8,4 @@ let g:netrw_dirhist_5='/'
 let g:netrw_dirhist_6='/Users'
 let g:netrw_dirhist_7='/Users/Guest'
 let g:netrw_dirhist_8='/Users/kaifu/Documents/Courses/15213/shelllab/tshlab-handout'
+let g:netrw_dirhist_9='/Users/kaifu/OneDrive/Share/MyPlayer'
